@@ -1,0 +1,28 @@
+### Puppet template
+# gitignore template for Puppet modules
+# website: https://forge.puppet.com/
+
+# User Secrets
+config.py
+
+# Built packages
+pkg/*
+
+# Should run on multiple platforms so don't check in
+Gemfile.lock
+
+# Tests
+spec/fixtures/*
+coverage/*
+
+# Third-party
+vendor/*
+.bundle/*
+
+/.idea/Canvas Interface.iml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/vcs.xml
+/.idea/workspace.xml
