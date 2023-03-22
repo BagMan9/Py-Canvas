@@ -6,7 +6,7 @@ This software is licensed under the terms of the GPLv3, with exemptions for spec
 
 You can find a copy of the license in the [LICENSE](LICENSE) file.
 
-Exemptions:
+#### Exemptions:
 
 Wabash College and any of its subsidiaries are exempt from GPLv3 licensing. 
 They are permitted, each at their individual discretion, to instead license any source code authored for this project 
