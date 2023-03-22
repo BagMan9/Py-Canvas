@@ -20,20 +20,27 @@ except ImportError:
     API_URL = config.api_url
     API_KEY = config.api_key
 except AttributeError:
-    print("Looks like your config.py file is missing some variables! "
+    print("Looks like your config.py file is missing some variables!\n"
           "Delete config and re-run the program to recreate it.")
     exit(1)
 
 
 Current_Courses = {}
+# General vars
 
-# Relevant Canvas Vars
+# Canvas API object
 canvas = canvasapi.Canvas(API_URL, API_KEY)
-user_id = 12552904
-me = canvas.get_user(user_id)
+
+# User ID acquisition
+me = canvas.get_current_user()
+
+# Get list of courses
 courses = me.get_courses()
+
+# Get current year and month
 year = datetime.date.today().year
 current_month = datetime.date.today().month
+
 # Find list of all courses
 for course in courses:
     nick = str(course.name)
