@@ -1,5 +1,6 @@
 import canvasapi
 import re
+import course_parse as cpar
 import datetime
 try:
     import config
@@ -25,14 +26,12 @@ except AttributeError:
     exit(1)
 
 
-Current_Courses = {}
-# General vars
-
 # Canvas API object
 canvas = canvasapi.Canvas(API_URL, API_KEY)
 
 # User ID acquisition
 me = canvas.get_current_user()
+print(me)
 
 # Get list of courses
 courses = me.get_courses()
@@ -41,21 +40,16 @@ courses = me.get_courses()
 year = datetime.date.today().year
 current_month = datetime.date.today().month
 
+# Dictionary of current courses
+Current_Courses = {}
+
+test = canvas.get_course(3664118)
+
 # Find list of all courses
 for course in courses:
-    nick = str(course.name)
-    course = str(course)
-    course = re.sub(",.+[SP|FA]", "", course)
-    print(course)
-    semester = re.findall("[.]\d{2}\S\w{2}", course)
-    course_number = re.findall("[(]\d{7}[)]", course)[0]
-    course_number = course_number[1:-1]
-    print(course_number)
-    if semester:
-        semester = semester[0]
-        semester = semester[1:]
-        if semester[-2:] == "SP" and current_month < 6:
-            Current_Courses[nick] = course_number
-        elif semester[-2:] == "FA" and current_month > 6:
-            Current_Courses[nick] = course_number
+    output = cpar.parse_course(course, "wabash")
+    if output:
+        Current_Courses[output[0]] = output[1]
 print(Current_Courses)
+
+
